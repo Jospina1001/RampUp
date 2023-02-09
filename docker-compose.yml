@@ -1,0 +1,33 @@
+version: "3.4"
+
+services:
+
+  preload:
+    build:
+      context: ./movie-analyst-api
+      dockerfile: Dockerfile.preload
+    environment:
+      MYSQL_HOST: 192.168.1.14
+      MYSQL_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: J680o680#
+      DB_DATABASE: movie_db
+
+  back:
+    build:
+      context: ./movie-analyst-api
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3000:3000"
+    environment:
+      MYSQL_HOST: 192.168.1.14
+      MYSQL_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: J680o680#
+      DB_DATABASE: movie_db
+      
+  front: 
+    build: ./movie-analyst-ui
+    ports:
+      - "3030:3030"
+      
